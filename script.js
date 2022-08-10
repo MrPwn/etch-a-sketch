@@ -13,4 +13,4 @@ function createGridItems(width) {
     }
 }
 
-createGridItems(4);
+createGridItems(10000);
