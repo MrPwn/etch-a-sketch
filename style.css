@@ -1,15 +1,16 @@
-
+:root {
+    --grid-dimension: 25;
+}
 
 .gridContainer {
-    aspect-ratio: 1;
     display: grid;
     background-color: lightblue;
     max-width: 960px;
     max-height: 960px;
     padding: 1px;
     gap: 1px;
-    grid-template-columns: repeat(100, 1fr);
-    grid-template-rows: repeat(100, 1fr);
+    grid-template-columns: repeat(var(--grid-dimension), 1fr);
+    grid-template-rows: repeat(var(--grid-dimension), 1fr);
 }
 
 .gridItem {
@@ -17,4 +18,8 @@
     background-color: white;
     box-sizing: border-box;
     width: auto;
+}
+
+#dimBtn {
+    background-color: aqua;
 }
