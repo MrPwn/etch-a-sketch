@@ -18,7 +18,7 @@ dimButton.textContent = 'Change grid dimensions';
 container.appendChild(dimButton);
 container.appendChild(gridContainer);
 
-createGridItems(625);
+createGridItems(256);
 
 dimButton.addEventListener('click', () => {
     let num = prompt('How many squares per side of the grid?')
@@ -26,6 +26,9 @@ dimButton.addEventListener('click', () => {
         alert('Your input must be a number greater than zero and less than 101!')
     } else if(num < 101 && num > 0) {
         document.documentElement.style.setProperty('--grid-dimension', num)
+        while (gridContainer.hasChildNodes()) {
+            gridContainer.removeChild(gridContainer.firstChild)
+        }
         createGridItems(num*num);
     }
 })
