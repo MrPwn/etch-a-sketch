@@ -54,6 +54,8 @@ function onHover(e) {
 dimButton.addEventListener('click', () => {
     num = prompt('How many squares per side of the grid?')
     if (isNaN(num)) {
+        alert('Your input must be a number!')
+    } else if ( num >= 101 || num <= 0) {
         alert('Your input must be a number greater than zero and less than 101!')
     } else if(num < 101 && num > 0) {
         document.documentElement.style.setProperty('--grid-dimension', num)
