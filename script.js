@@ -7,20 +7,26 @@ const dimButton = document.createElement('button');
 dimButton.classList.add('controlButtons');
 dimButton.textContent = 'Change grid dimensions';
 
+const colorButton = document.createElement('button');
+colorButton.classList.add('controlButtons');
+colorButton.textContent = 'Sketch!';
+
 const eraseButton = document.createElement('button');
 eraseButton.classList.add('controlButtons');
-eraseButton.textContent = 'Eraser';
+eraseButton.textContent = 'Erase';
 
 const clearButton = document.createElement('button');
 clearButton.classList.add('controlButtons');
-clearButton.textContent = 'Clear Grid';
+clearButton.textContent = 'Clear board';
 
 container.appendChild(dimButton);
+container.appendChild(colorButton);
 container.appendChild(eraseButton);
 container.appendChild(clearButton);
 container.appendChild(gridContainer);
 
 let num = 16;
+let clicked = 'color';
 
 function createGridItems(width) {
     for (i = 0; i < width; i++) {
@@ -30,17 +36,19 @@ function createGridItems(width) {
         gridContainer.appendChild(gridItem);
     }
     let gridArray = document.getElementsByClassName('gridItem');
-    Array.from(gridArray).forEach(gridItem => gridItem.addEventListener('mouseover', colorOnHover))
+    Array.from(gridArray).forEach(gridItem => gridItem.addEventListener('mouseover', onHover))
 }
 
-function colorOnHover(e) {
-    let gridItem = document.getElementById(e.target.id)
-    gridItem.classList.add('hovered')
-}
-
-function eraseOnHover(e) {
-    let gridItem = document.getElementById(e.target.id)
-    gridItem.classList.remove('hovered')
+function onHover(e) {
+    let gridItem = document.getElementById(e.target.id);
+    switch (clicked) {
+        case 'color':
+            gridItem.classList.add('hovered');
+            break;
+        case 'erase':
+            gridItem.classList.remove('hovered')
+            break;
+    }
 }
 
 dimButton.addEventListener('click', () => {
@@ -56,9 +64,16 @@ dimButton.addEventListener('click', () => {
     }
 })
 
-eraseButton.addEventListener('click', () => {
+colorButton.addEventListener('click', () => {
+    clicked = 'color';
     let gridArray = document.getElementsByClassName('gridItem');
-    Array.from(gridArray).forEach(gridItem => gridItem.addEventListener('mouseover', eraseOnHover))
+    Array.from(gridArray).forEach(gridItem => gridItem.addEventListener('mouseover', onHover))
+})
+
+eraseButton.addEventListener('click', () => {
+    clicked = 'erase';
+    let gridArray = document.getElementsByClassName('gridItem');
+    Array.from(gridArray).forEach(gridItem => gridItem.addEventListener('mouseover', onHover))
 })
 
 clearButton.addEventListener('click', () => {
