@@ -36,7 +36,11 @@ function createGridItems(width) {
 function colorOnHover(e) {
     let gridItem = document.getElementById(e.target.id)
     gridItem.classList.add('hovered')
-    console.log(gridItem.className)
+}
+
+function eraseOnHover(e) {
+    let gridItem = document.getElementById(e.target.id)
+    gridItem.classList.remove('hovered')
 }
 
 dimButton.addEventListener('click', () => {
@@ -53,7 +57,8 @@ dimButton.addEventListener('click', () => {
 })
 
 eraseButton.addEventListener('click', () => {
-
+    let gridArray = document.getElementsByClassName('gridItem');
+    Array.from(gridArray).forEach(gridItem => gridItem.addEventListener('mouseover', eraseOnHover))
 })
 
 clearButton.addEventListener('click', () => {
