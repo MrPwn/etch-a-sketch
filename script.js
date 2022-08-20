@@ -49,9 +49,11 @@ function onHover(e) {
     switch (clicked) {
         case 'color':
             gridItem.classList.add('hovered');
+            gridItem.style.removeProperty('background-color');
             break;
         case 'erase':
             gridItem.classList.remove('hovered');
+            gridItem.style.removeProperty('background-color');
             break;
         case 'random':
             gridItem.classList.remove('hovered');
