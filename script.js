@@ -11,6 +11,10 @@ const colorButton = document.createElement('button');
 colorButton.classList.add('controlButtons');
 colorButton.textContent = 'Sketch!';
 
+const randButton = document.createElement('button');
+randButton.classList.add('controlButtons');
+randButton.textContent = 'Random Colors!';
+
 const eraseButton = document.createElement('button');
 eraseButton.classList.add('controlButtons');
 eraseButton.textContent = 'Erase';
@@ -21,6 +25,7 @@ clearButton.textContent = 'Clear board';
 
 container.appendChild(dimButton);
 container.appendChild(colorButton);
+container.appendChild(randButton);
 container.appendChild(eraseButton);
 container.appendChild(clearButton);
 container.appendChild(gridContainer);
@@ -46,9 +51,22 @@ function onHover(e) {
             gridItem.classList.add('hovered');
             break;
         case 'erase':
-            gridItem.classList.remove('hovered')
+            gridItem.classList.remove('hovered');
+            break;
+        case 'random':
+            gridItem.classList.remove('hovered');
+            gridItem.style.backgroundColor = getRGBValue()
             break;
     }
+}
+
+function getRGBValue() {
+    let max = 256;
+    let r = Math.floor(Math.random() * (max + 1));
+    let g = Math.floor(Math.random() * (max + 1));
+    let b = Math.floor(Math.random() * (max + 1));
+
+    return `rgb(${r}, ${g}, ${b})`
 }
 
 dimButton.addEventListener('click', () => {
@@ -68,6 +86,12 @@ dimButton.addEventListener('click', () => {
 
 colorButton.addEventListener('click', () => {
     clicked = 'color';
+    let gridArray = document.getElementsByClassName('gridItem');
+    Array.from(gridArray).forEach(gridItem => gridItem.addEventListener('mouseover', onHover))
+})
+
+randButton.addEventListener('click', () => {
+    clicked = 'random';
     let gridArray = document.getElementsByClassName('gridItem');
     Array.from(gridArray).forEach(gridItem => gridItem.addEventListener('mouseover', onHover))
 })
